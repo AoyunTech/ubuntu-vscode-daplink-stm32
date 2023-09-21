@@ -1,0 +1,109 @@
+第一步安装GCC
+解压GCC
+sudo mkdir -p /opt/gcc-arm/
+tar -xvjf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar -C /opt/gcc-arm/
+cd /opt/gcc-arm/
+sudo chown -R root:root arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi/
+---------------------------------------------------
+配置环境变量
+# sudo gedit /etc/profile
+应用环境变量
+在 Ubuntu 系统中有两种设置环境变量 PATH 的方法。
+第一种适用于为单一用户设置 PATH，第二种是为全局设置 PATH。
+第三种方法适合于暂时修改，重新登录后失效。
+第一种方法：
+在用户主目录下有一个 .bashrc 文件，可以在此文件中加入 PATH 的设置如下：
+export PATH=$PATH:/your path1/:/your path2/…..
+注意：每一个 path 之间要用 “:“ 分隔
+嵌入式linux开发中，比如toolchain，最好是用到的时候再export也就是所谓的第三种方法，但是最好是这样写：
+
+export PATH=/opt/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH
+export LD_LIBRARY_PATH=/opt/gcc-arm/gcc-arm-none-eabi-10.3-2021.10/lib:$LD_LIBRARY_PATH
+----------------------------------------------------
+查看是否安装成功
+arm-none-eabi-gcc -v
+第二步安装openocd
+解压openocd
+unzip openocd-code.zip
+设置openocd
+./bootstrap
+./configure
+编译安装
+make
+sudo make install 
+验证是否安装成功
+openocd -v
+第三步安装stlink
+sudo dpkg -i stlink_1.7.0-1_amd64.deb
+第四步安装STM32 cubuMX
+生成工程
+设置为makefile
+
+第五步安装VScode 并编译及运行工程
+打开生成的工程
+安装Cortex Debug
+配置Cortex Debug设置
+设置launch.json文件
+编译运行
+make
+make clean
+--------------------------------------------------------------------------------
+代码烧写
+st-flash write led2.bin 0x8000000
+---------------------------------------------------------------------------------
+# 下载 cmake-3.22.3.tar.gz
+wget https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz
+# 解压 cmake-3.21.0-rc2.tar.gz
+tar -zxvf cmake-3.22.3.tar.gz
+# 切换到 CMake 源目录并执行 bootstrap 脚本
+cd cmake-3.22.3.tar.gz
+./bootstrap --parallel=32
+# 执行 make
+make -j32
+sudo make install -j32
+ln -s /usr/local/bin/cmake /usr/bin/cmake 
+# 软连接 ln [original filename] [link name]
+# 查看 cmake 工具版本
+cmake --version
+----------------------------------------------------------------------------------
+#OpenSSL安装
+wget https://www.openssl.org/source/openssl-1.1.1g.tar.gz
+tar -xzvf openssl-1.1.1g.tar.gz 
+cd openssl-1.1.1g/
+./config
+make
+sudo make install
+#查看 openssl 工具版本
+openssl version
+-----------------------------------------------------------------------------------
+sudo aptitude install libgstreamer-plugins-base1.0-dev
+sudo apt-get install aptitude
+-----------------------------------------------------------------------------------
+# 安装VSCode - Ubuntu20.04下安装VSCode（配置C/C++开发环境）
+https://zhuanlan.zhihu.com/p/585021932?utm_id=0
+-----------------------------------------------------------------------------------
+sudo apt isntall libncurses5
+-----------------------------------------------------------------------------------
+snap install notepadqq
+-----------------------------------------------------------------------------------
+安装openOCD
+sudo apt-get install build-essential pkg-config autoconf automake libtool libusb-dev libusb-1.0-0-dev libhidapi-dev
+sudo apt-get install libtool libsysfs-dev
+
+sudo ./bootstrap
+sudo ./configure --enable-jlink --enable-cmsis-dap --enable-stlink
+sudo make
+sudo make install
+
+sudo openocd -f /usr/local/share/openocd/scripts/interface/cmsis-dap.cfg \
+	-f /usr/local/share/openocd/scripts/target/stm32f4x.cfg \
+	-c "init" \
+	-c "reset init" \
+	-c "program ./NB_IOT.hex verify reset exit"
+	
+chmod +x daplink.sh
+./daplink.sh
+-----------------------------------------------------------------------------------
+SUBSYSTEM=="ttyACM", ATTR{idVendor}=="c251", ATTR{idProduct}=="f001", MODE:="777", SYMLINK+="usbhid"
+-----------------------------------------------------------------------------------
+

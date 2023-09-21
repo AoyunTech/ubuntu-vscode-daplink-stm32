@@ -1,0 +1,1 @@
+openocd -d2 -f /usr/local/share/openocd/scripts/interface/cmsis-dap.cfg -c "transport select swd" -c "adapter speed 1000" -f /usr/local/share/openocd/scripts/target/stm32f4x.cfg -c "init" -c "reset init" -c "program ./standard_robot.hex verify reset exit"
