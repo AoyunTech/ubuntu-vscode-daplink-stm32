@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 SPEED=1000
 DAPLINK=/usr/local/share/openocd/scripts/interface/cmsis-dap.cfg
