@@ -1,6 +1,6 @@
 #/bin/bash
 
-SPEED=6000
+SPEED=1000
 DAPLINK=/usr/local/share/openocd/scripts/interface/cmsis-dap.cfg
 MCU_CFG=/usr/local/share/openocd/scripts/target/stm32f4x.cfg
 

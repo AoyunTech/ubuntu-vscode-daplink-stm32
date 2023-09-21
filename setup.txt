@@ -106,4 +106,13 @@ chmod +x daplink.sh
 -----------------------------------------------------------------------------------
 SUBSYSTEM=="ttyACM", ATTR{idVendor}=="c251", ATTR{idProduct}=="f001", MODE:="777", SYMLINK+="usbhid"
 -----------------------------------------------------------------------------------
+ 1967  git config --global user.name "AoyunTech"
+ 1968  git config --global user.email "aoyuntech@163.com"
+ 2025  git push origin main
+ 2026  git remote -v
+ 2027  git remote set-url origin git@github.com:AoyunTech/ubuntu-vscode-daplink-stm32.git
+ 2028  git push
+ 2029  git log
+ 2030  git push -u origin main
+----------------------------------------------------------------------------------
 
